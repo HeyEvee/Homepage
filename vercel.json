@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/api/waitlist", "destination": "/api/waitlist.js" },
+    { "source": "/(.*)", "destination": "/public/index.html" }
+  ]
+}
