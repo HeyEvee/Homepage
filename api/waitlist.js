@@ -65,6 +65,49 @@ export default async function handler(req, res) {
       console.error('Airtable error:', err);
     } else {
       console.log('Waitlist signup saved:', email);
+
+    // Add to Mailchimp with waitlist tag
+    const mcKey = process.env.MAILCHIMP_API_KEY;
+    const mcAudience = process.env.MAILCHIMP_AUDIENCE_ID || '952a37e18e';
+    if (mcKey) {
+      const dc = mcKey.split('-')[1]; // e.g. us22
+      const mcUrl = 'https://' + dc + '.api.mailchimp.com/3.0/lists/' + mcAudience + '/members';
+      try {
+        const mcRes = await fetch(mcUrl, {
+          method: 'POST',
+          headers: {
+            'Authorization': 'Basic ' + Buffer.from('anystring:' + mcKey).toString('base64'),
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email_address: email,
+            status: 'subscribed',
+            merge_fields: { FNAME: name },
+            tags: ['waitlist']
+          })
+        });
+        const mcData = await mcRes.json();
+        if (mcRes.ok) {
+          console.log('Added to Mailchimp:', email);
+        } else if (mcData.title === 'Member Exists') {
+          // Already subscribed — just add the tag
+          const memberHash = require('crypto').createHash('md5').update(email.toLowerCase()).digest('hex');
+          await fetch('https://' + dc + '.api.mailchimp.com/3.0/lists/' + mcAudience + '/members/' + memberHash + '/tags', {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Basic ' + Buffer.from('anystring:' + mcKey).toString('base64'),
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ tags: [{ name: 'waitlist', status: 'active' }] })
+          });
+          console.log('Mailchimp tag added to existing member:', email);
+        } else {
+          console.error('Mailchimp error:', mcData.detail || mcData.title);
+        }
+      } catch (mcErr) {
+        console.error('Mailchimp request failed:', mcErr.message);
+      }
+    }
     }
 
     // 3. Send cheat code PDF email
