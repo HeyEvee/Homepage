@@ -127,7 +127,7 @@ async function sendCheatCode(apiKey, email, name) {
   const firstName = name ? name.split(' ')[0] : 'Mama';
 
   // PDF link — update this to your hosted PDF URL once uploaded
-  const PDF_URL = 'https://heyevee.com/MomCreatorCheatCode.pdf';
+  const PDF_URL = 'https://app.heyevee.com/MomCreatorCheatCode.pdf';
 
   const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"/></head>'
     + '<body style="margin:0;padding:0;background:#f5ede8;font-family:Helvetica,Arial,sans-serif">'
@@ -143,9 +143,15 @@ async function sendCheatCode(apiKey, email, name) {
     + '<div style="padding:28px 24px">'
     + '<p style="font-size:15px;color:#3a1e14;line-height:1.75;margin:0 0 16px">Hey ' + firstName + '! Welcome to the Hey Evee waitlist. You are officially one of the first to know when we launch.</p>'
     + '<p style="font-size:15px;color:#3a1e14;line-height:1.75;margin:0 0 20px">Here is your free cheat code — 5 content formulas that actually convert. Plug in your niche, post, and watch what happens.</p>'
-    + '<div style="text-align:center;margin:24px 0">'
-    + '<a href="' + PDF_URL + '" style="display:inline-block;background:linear-gradient(135deg,#c4614a,#d4507a);color:#fff;font-size:15px;font-weight:800;text-decoration:none;border-radius:24px;padding:14px 36px">Download Your Free PDF &#8250;</a>'
+    + '<div style="text-align:center;margin:28px 0">'
+    + '<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">'
+    + '<table cellpadding="0" cellspacing="0" border="0"><tr>'
+    + '<td style="background-color:#c4614a;border-radius:28px;padding:16px 40px">'
+    + '<a href="' + PDF_URL + '" target="_blank" style="display:inline-block;color:#ffffff;font-size:16px;font-weight:800;text-decoration:none;font-family:Helvetica,Arial,sans-serif">Download Your Free Cheat Code &rsaquo;</a>'
+    + '</td></tr></table>'
+    + '</td></tr></table>'
     + '</div>'
+    + '<p style="font-size:12px;color:#9a7060;text-align:center;margin:0 0 20px">Tap the button above to download your free PDF</p>'
     + '<div style="background:#fdf8f5;border-radius:14px;padding:16px 18px;margin:0 0 20px;border:1px solid rgba(196,97,74,.1)">'
     + '<p style="font-size:12px;font-weight:900;color:#c4614a;text-transform:uppercase;letter-spacing:1.5px;margin:0 0 8px">What is inside the cheat code</p>'
     + '<p style="font-size:13px;color:#3a1e14;line-height:1.8;margin:0">'
@@ -155,9 +161,10 @@ async function sendCheatCode(apiKey, email, name) {
     + '&#9671; The POV Story<br/>'
     + '&#9671; The Number List Hook</p>'
     + '</div>'
+    + '<p style="font-size:13px;color:#9a7060;line-height:1.75;margin:0 0 8px">If the button above does not work, copy and paste this link: <a href="' + PDF_URL + '" style="color:#c4614a">' + PDF_URL + '</a></p>'
     + '<p style="font-size:13px;color:#9a7060;line-height:1.75;margin:0 0 16px">We will be in touch when Hey Evee launches. You will get early access and first dibs on founding member pricing.</p>'
     + '<p style="font-size:13px;color:#9a7060;margin:0">With love,<br/><strong style="color:#1a0d08">Simone</strong><br/>'
-    + '<span style="font-size:12px;color:#b09080">Founder, Hey Evee &#9671; Mom of Four &#9671; @lifewith.simone</span></p>'
+    + '<span style="font-size:12px;color:#b09080">Founder, Hey Evee &#9671; Mom of Four &#9671; @heyeveeapp</span></p>'
     + '</div></div>'
     + '<div style="text-align:center;padding:20px 0">'
     + '<p style="font-size:11px;color:#b09080;margin:0">&#169; 2026 Hey Evee &#9671; <a href="https://heyevee.com" style="color:#c4614a;text-decoration:none">heyevee.com</a></p>'
