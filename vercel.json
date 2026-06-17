@@ -1,7 +1,6 @@
 {
   "rewrites": [
     { "source": "/api/waitlist", "destination": "/api/waitlist.js" },
-    { "source": "/MomCreatorCheatCode.pdf", "destination": "/public/MomCreatorCheatCode.pdf" },
     { "source": "/(.*)", "destination": "/public/index.html" }
   ]
 }
